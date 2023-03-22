@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "286153656095",
+    "project_id": "subway-serf",
+    "storage_bucket": "subway-serf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286153656095:android:d157566877be97bc86122a",
+        "android_client_info": {
+          "package_name": "com.SubwaySerfCompany.Trainecourse5daySubwayserf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286153656095-9qi3e3pedpm5hg6kltp3qar8ls49r2oh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC60TAc6DL1lLPDbVklJqBPilKCcQVzADo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286153656095-9qi3e3pedpm5hg6kltp3qar8ls49r2oh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

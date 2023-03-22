@@ -1,0 +1,63 @@
+[33mcommit ea22124aa4151ad4580cee7096474e2a7e0f316c[m[33m ([m[1;36mHEAD -> [m[1;32mdeveloping[m[33m)[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 17:34:53 2023 +0200
+
+    Not working
+
+[33mcommit 2d12568949a42ed94e261af92af257abfa29cb6f[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 16:54:49 2023 +0200
+
+    Try fix all
+
+[33mcommit df937089e46e1ab0cb41bb37fa057e74e328858a[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 16:50:24 2023 +0200
+
+    IDK
+
+[33mcommit b8d7499af67f49bcedd654262e37a8ca44634a57[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 16:39:04 2023 +0200
+
+    Revert "Revert "Installed Firebase and added registration""
+    
+    This reverts commit 2977a038275dcee184b5a0b1434b6a35bd1eaf01.
+
+[33mcommit 2977a038275dcee184b5a0b1434b6a35bd1eaf01[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 16:31:57 2023 +0200
+
+    Revert "Installed Firebase and added registration"
+    
+    This reverts commit 3b70ee5ba1595cce5d6d47c3cfe313ae83c89c0c.
+
+[33mcommit 3b70ee5ba1595cce5d6d47c3cfe313ae83c89c0c[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 15:14:48 2023 +0200
+
+    Installed Firebase and added registration
+
+[33mcommit aa0259839e82eec04d66f9127b311e5cc2fcfdd2[m[33m ([m[1;31morigin/developing[m[33m)[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Wed Mar 22 11:02:24 2023 +0200
+
+    Added player control
+
+[33mcommit 5f50b290f9c92f1bd35f563b8bdd02aa5a48cc42[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Tue Mar 21 15:33:03 2023 +0200
+
+    Added Main menu and obstacles
+
+[33mcommit 8174a1ff4bcb4b07fbc0425c94cddc44ca1ca9ef[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Tue Mar 21 13:11:57 2023 +0200
+
+    Added scene Authentification and Registration
+
+[33mcommit bbe70c8d3fff0010ffaa229b9a2e3104e50e8138[m[33m ([m[1;32mmaster[m[33m)[m
+Author: BogdanKor <korniychuk.b22@cf.dnu.dp.ua>
+Date:   Tue Mar 21 11:35:42 2023 +0200
+
+    Initialize commit
