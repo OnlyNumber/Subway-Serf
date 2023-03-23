@@ -22,16 +22,16 @@ public class AuthentificationManager : MonoBehaviour
     {
 
 
-        if(Email.text.ToString() != InfoForRegistraion.Email)
+        /*if(Email.text.ToString() != InfoForRegistraion.Email)
         {
-            ErrorText.text = "Wrong Email";
+            ErrorText.text = InfoForRegistraion.Email + "Wrong Email";
             return;
         }
         if (Password.text.ToString() != InfoForRegistraion.Password)
         {
-            ErrorText.text = "Wrong Password";
+            ErrorText.text = InfoForRegistraion.Password + "Wrong Password";
             return;
-        }
+        }*/
 
 
 

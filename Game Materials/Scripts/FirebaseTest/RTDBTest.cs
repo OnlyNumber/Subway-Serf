@@ -15,8 +15,27 @@ public class RTDBTest : MonoBehaviour
 
     public void SaveData()
     {
-        dbRef.Child("Uadsasdawd").SetValueAsync("adawwda");
+        UserData user = new UserData("TestUser1", 0);
+
+        string json = JsonUtility.ToJson(user);
+
+        dbRef.Child("users").Child("TestUser1").SetRawJsonValueAsync(json);
     }
+
+    public class UserData
+    {
+        public string name;
+        public int score;
+
+        public UserData(string name, int score )
+        {
+            this.name = name;
+            this.score = score;
+
+        }
+
+    }
+
 
 
 }

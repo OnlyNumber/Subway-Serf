@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  positionForDeath: -10
 --- !u!54 &7288099236005924905
 Rigidbody:
   m_ObjectHideFlags: 0
