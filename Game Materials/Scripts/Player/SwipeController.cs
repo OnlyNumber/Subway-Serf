@@ -23,22 +23,42 @@ public class SwipeController : MonoBehaviour
 
     private void Update()
     {
-        if (!isMobile)
+        if (!myPlayer.isDead)
         {
-
-            if (Input.GetMouseButtonDown(0))
+            if (!isMobile)
             {
-                isSwiping = true;
-                tapPosition = Input.mousePosition;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isSwiping = true;
+                    tapPosition = Input.mousePosition;
+
+                }
+                else if (Input.GetMouseButtonUp(0))
+                {
+                    ResetSwipe();
+                }
 
             }
-            else if (Input.GetMouseButtonUp(0))
+            else
             {
-                ResetSwipe();
-            }
+                if(Input.touchCount > 0)
+                {
+                    if(Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+                        isSwiping = true;
+                        tapPosition = Input.GetTouch(0).position;
+                    }
+                    else if(Input.GetTouch(0).phase == TouchPhase.Canceled ||
+                        Input.GetTouch(0).phase == TouchPhase.Ended)
+                    {
+                        ResetSwipe();
+                    }
+                }
+            }    
+
+            CheckPos();
         }
-
-        CheckPos();
     }
 
     private void CheckPos()

@@ -7,6 +7,8 @@ public class Obstacle : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    private float currentSpeed;
+
     [SerializeField]
     private float positionForDeath;
 
@@ -14,20 +16,32 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
+        currentSpeed = speed;
+
         myRb = GetComponent<Rigidbody>();
+
+        SpawnManager.instance.onIsGameFinish += GameIsOff;
+
     }
 
     void Update()
     {
+        
         myRb.velocity = new Vector3(0, 0, -speed);
-
-        Debug.Log(transform.position);
 
         if(transform.position.z <= positionForDeath)
         {
+
+            SpawnManager.instance.onIsGameFinish -= GameIsOff;
             Destroy(gameObject);
         }
 
 
     }
+
+    private void GameIsOff()
+    {
+        speed = 0;
+    }
+
 }

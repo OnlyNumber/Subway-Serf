@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager instance;
+
+
     public delegate void OnGameChange();
 
     public OnGameChange onIsGameStart;
@@ -48,13 +51,18 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private Transform[] spawnPoints;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         onIsGameStart += GameStart;
 
         StartCoroutine(SpawnObstacles());
 
-
+        
     }
 
     IEnumerator WaitTime()
@@ -79,6 +87,11 @@ public class SpawnManager : MonoBehaviour
     private void GameStart()
     {
         StartCoroutine(WaitTime());
+    }
+
+    public void Restart()
+    {
+
     }
 
 

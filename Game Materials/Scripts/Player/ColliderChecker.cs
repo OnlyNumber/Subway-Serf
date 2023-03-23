@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class ColliderChecker : MonoBehaviour
 {
-    private SpawnManager spMan;
+    //private SpawnManager spMan;
 
     void Start()
     {
-        spMan = FindObjectOfType<SpawnManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
         {
-            spMan.ISGAME = false;
+            SpawnManager.instance.ISGAME = false;
             
         }
     }

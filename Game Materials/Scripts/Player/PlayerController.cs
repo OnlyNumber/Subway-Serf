@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator animController;
 
-    private SpawnManager spMan;
+    //private SpawnManager spMan;
 
     private Rigidbody myRb;
 
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
 
-
+    public bool isDead = false;
 
 
     private void Start()
@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
 
         selectedLine = new Vector3(0, 0, -2.2f);
+
+        SpawnManager.instance.onIsGameFinish += Death;
+        SpawnManager.instance.onIsGameStart += StartGame;
+
 
         myRb = GetComponent<Rigidbody>();
     }
@@ -49,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
         selectedLine.y = transform.position.y;
         MovingToLine();
+
+
+
     }
 
 
@@ -122,15 +129,23 @@ public class PlayerController : MonoBehaviour
         {
             if(hit.CompareTag("Ground"))
             {
-                //animController.SetBool("isGround", true);
-
                 return true;
             }    
         }
 
-        //animController.SetBool("isGround", false);
         return false;
     
     }
+
+    private void StartGame()
+    {
+        animController.SetTrigger("StartGame");
+    }
+
+    private void Death()
+    {
+        animController.SetBool("isDead", true);
+    }
+
 
 }
