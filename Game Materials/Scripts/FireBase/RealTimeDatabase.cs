@@ -25,12 +25,20 @@ public class RealTimeDatabase : MonoBehaviour
 
     [SerializeField]
     private GameObject textForLeaderBoard;
+
+    [SerializeField]
+    private Text scoreNow;
+
+    [SerializeField]
+    private Text[] LeaderBoardFields;
+
     
     private void Start()
     {
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
 
         StartCoroutine(LoadData(playerData.UserName));
+        StartCoroutine(LoadBoardData());
 
     }
 
@@ -97,23 +105,56 @@ public class RealTimeDatabase : MonoBehaviour
 
             reverseList.Reverse();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 if (reverseList.Count > i)
                 {
-                    gO = Instantiate(textForLeaderBoard, leaderBoard.transform);
-
-                    gO.GetComponent<Text>().text = reverseList[i].Child("name").Value.ToString();
+                    LeaderBoardFields[i].text = reverseList[i].Child("name").Value.ToString() + ":  " + reverseList[i].Child("score").Value.ToString();
+                }
+                else
+                {
+                    LeaderBoardFields[i].text = "";
                 }
             }
-
-
-           
-
         }
 
 
     }
+
+    private void SaveData(string Name, int score)
+    {
+            UserData user2229 = new UserData(Name, score);
+
+            string json = JsonUtility.ToJson(user2229);
+
+            dbRef.Child("users").Child(Name).SetRawJsonValueAsync(json);
+    
+    }
+
+    private bool CheckRecord()
+    {
+        if(int.Parse(scoreNow.text) > int.Parse(Score.text))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public void SaveRecord()
+    {
+        if(CheckRecord())
+        {
+            SaveData(playerData.UserName,int.Parse(scoreNow.text));
+        }
+    }
+
+
+    
+
 
 
     

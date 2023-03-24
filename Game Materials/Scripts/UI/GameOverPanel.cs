@@ -14,13 +14,20 @@ public class GameOverPanel : MonoBehaviour
     private void Start()
     {
 
-        SpawnManager.instance.onIsGameFinish += onGameFinish;
+        SpawnManager.instance.onIsGameFinish += SetActiveTrue;
+        SpawnManager.instance.onIsGameStart += SetActiveFalse;
     }
 
-    public void onGameFinish()
+    public void SetActiveFalse()
+    {
+        panel.SetActive(false);
+    }
+
+    public void SetActiveTrue()
     {
         panel.SetActive(true);
     }
+
 
     [ContextMenu("stop")]
     public void TimeStop()

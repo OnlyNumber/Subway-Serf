@@ -23,7 +23,7 @@ public class SwipeController : MonoBehaviour
 
     private void Update()
     {
-        if (!myPlayer.isDead)
+        if (SpawnManager.instance.ISGAME)
         {
             if (!isMobile)
             {

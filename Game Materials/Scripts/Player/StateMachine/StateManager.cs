@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static StateManager instance;
+
+    private State currentState;
+
+    [SerializeField]
+    private Animator animController;
+
+    private void Start()
     {
-        
+        currentState = new Idle();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        currentState.OnUpdate();
     }
+
+    public void MainState()
+    {
+        currentState.OnExit();
+        
+        currentState = new Running();
+
+        currentState.OnEnter();
+    }
+
+    public void GoToNextState(State nextState)
+    {
+        currentState.OnExit();
+
+        currentState = nextState;
+
+        currentState.OnEnter();
+
+
+    }
+
+
+
 }

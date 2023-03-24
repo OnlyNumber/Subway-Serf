@@ -22,7 +22,7 @@ public class RTDBTest : MonoBehaviour
         dbRef.Child("users").Child("TestUser1").SetRawJsonValueAsync(json);
     }
 
-    public class UserData
+    /*public class UserData
     {
         public string name;
         public int score;
@@ -34,7 +34,7 @@ public class RTDBTest : MonoBehaviour
 
         }
 
-    }
+    }*/
 
 
 

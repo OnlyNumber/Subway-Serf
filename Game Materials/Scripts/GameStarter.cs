@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
-    SpawnManager spawnManager;
-
     private void Start()
     {
-        spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            spawnManager.ISGAME = true;
-            gameObject.SetActive(false);
+            Debug.Log("GameStarter");
+
+            SpawnManager.instance.ISGAME = true;
         }
     }
 

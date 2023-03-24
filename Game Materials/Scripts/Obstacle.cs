@@ -21,6 +21,7 @@ public class Obstacle : MonoBehaviour
         myRb = GetComponent<Rigidbody>();
 
         SpawnManager.instance.onIsGameFinish += GameIsOff;
+        SpawnManager.instance.onIsGameStart += GameIsOn;
 
     }
 
@@ -32,8 +33,11 @@ public class Obstacle : MonoBehaviour
         if(transform.position.z <= positionForDeath)
         {
 
-            SpawnManager.instance.onIsGameFinish -= GameIsOff;
-            Destroy(gameObject);
+            //SpawnManager.instance.onIsGameFinish -= GameIsOff;
+
+            gameObject.SetActive(false);
+
+            //Destroy(gameObject);
         }
 
 
@@ -42,6 +46,17 @@ public class Obstacle : MonoBehaviour
     private void GameIsOff()
     {
         speed = 0;
+    }
+
+    private void GameIsOn()
+    {
+        speed = currentSpeed;
+    }
+
+
+    public void OffObject()
+    {
+
     }
 
 }

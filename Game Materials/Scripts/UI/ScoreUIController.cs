@@ -18,7 +18,7 @@ public class ScoreUIController : MonoBehaviour
 
     private void Update()
     {
-
+        
         playerScore.text = ((int)score).ToString();
 
     }
@@ -27,9 +27,15 @@ public class ScoreUIController : MonoBehaviour
     {
         if (SpawnManager.instance.ISGAME)
         {
-            score += Time.deltaTime * 100;
+            score += Time.deltaTime * 1;
         }
     }
+
+    public void RestartScore()
+    {
+        score = 0;
+    }    
+
 
 
 
