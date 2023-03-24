@@ -51,9 +51,10 @@ public class RewardedR : MonoBehaviour
 
     public void HandeUserEarnedReward(object sender, Reward args)
     {
-
-        Debug.Log("TakeReward");
         RequesRewardVideo();
+    
+        
+    
     }
 
 

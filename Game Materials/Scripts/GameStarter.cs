@@ -12,7 +12,6 @@ public class GameStarter : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("GameStarter");
 
             SpawnManager.instance.ISGAME = true;
         }
