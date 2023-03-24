@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRb;
 
     [SerializeField]
-    private BoxCollider upCollider;
+    public BoxCollider upCollider;
 
     [SerializeField]
     private float slideTime;
@@ -30,31 +30,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    public bool isDead = false;
-
-
     private void Start()
     {
 
-
         selectedLine = new Vector3(0, 0, -2.2f);
-
-        SpawnManager.instance.onIsGameFinish += Death;
-        SpawnManager.instance.onIsGameStart += StartGame;
-
 
         myRb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        animController.SetBool("isGround", CheckGround());
-        //Debug.Log(CheckGround());
-
         selectedLine.y = transform.position.y;
         MovingToLine();
-
-
 
     }
 
@@ -63,7 +50,6 @@ public class PlayerController : MonoBehaviour
     {
         if (direction < 0)
         {
-
 
             if (selectedLine.x > -2)
             {
@@ -77,22 +63,15 @@ public class PlayerController : MonoBehaviour
                 selectedLine.x += 3;
             }
         }
-
-
-
     }    
 
     private IEnumerator Slide ()
     {
         upCollider.enabled = false;
-        animController.SetBool("isSliding", true);
-
 
         myRb.velocity = new Vector2(myRb.velocity.x, -jumpPower/1.5f);
 
         yield return new WaitForSeconds(slideTime);
-
-        animController.SetBool("isSliding", false);
 
         upCollider.enabled = true;
 
@@ -102,7 +81,6 @@ public class PlayerController : MonoBehaviour
     {
         if (CheckGround())
         {
-            //Debug.Log("JUMP");
             myRb.velocity = new Vector2(myRb.velocity.x, jumpPower);
         }
     }
@@ -120,7 +98,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool CheckGround()
+    public bool CheckGround()
     {
 
         Collider[] groundHits = Physics.OverlapSphere(transform.position, 0.1f);
@@ -137,15 +115,14 @@ public class PlayerController : MonoBehaviour
     
     }
 
-    private void StartGame()
+    public void AfterDeath()
     {
-        animController.SetTrigger("StartGame");
+        selectedLine.x = 0;
+
+        transform.position = new Vector3(0, 0, transform.position.z);
+
     }
 
-    private void Death()
-    {
-        animController.SetBool("isDead", true);
-    }
 
 
 }

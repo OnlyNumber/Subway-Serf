@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class Dead : State
 {
-    
+
+
+    public override void OnEnter()
+    {
+        StateManager.instance.animController.SetTrigger("isDeath");
+    }
+
+    public override void OnExit()
+    {
+    }
 }

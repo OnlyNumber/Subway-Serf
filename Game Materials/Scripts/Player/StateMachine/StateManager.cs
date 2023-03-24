@@ -6,13 +6,20 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager instance;
 
+    [SerializeField]
     private State currentState;
 
-    [SerializeField]
-    private Animator animController;
+    public Animator animController;
+
+    
+
+    public PlayerController playerControl;
 
     private void Start()
     {
+        instance = this;
+        animController = GetComponentInChildren<Animator>();
+        playerControl = GetComponent<PlayerController>();
         currentState = new Idle();
     }
 
@@ -21,11 +28,11 @@ public class StateManager : MonoBehaviour
         currentState.OnUpdate();
     }
 
-    public void MainState()
+    public void IdleState()
     {
         currentState.OnExit();
         
-        currentState = new Running();
+        currentState = new Idle();
 
         currentState.OnEnter();
     }
@@ -41,6 +48,14 @@ public class StateManager : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Debug.Log("Death");
 
+            GoToNextState(new Dead());
+        }
+    }
 
 }

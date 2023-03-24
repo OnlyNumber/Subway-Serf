@@ -32,14 +32,14 @@ public class SpawnManager : MonoBehaviour
             IsGame = value;
             if (IsGame == true)
             {
-                Debug.Log("Change on true");
+                //Debug.Log("Change on true");
 
                 onIsGameStart?.Invoke();
             }
             else
             {
 
-                Debug.Log("Change on false");
+                //Debug.Log("Change on false");
                 onIsGameFinish?.Invoke();
             }
         }
@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("OBGAMESTART");
+        //Debug.Log("OBGAMESTART");
 
         onIsGameStart += GameStart;
 
@@ -128,7 +128,7 @@ public class SpawnManager : MonoBehaviour
     
     IEnumerator SpawnObstacles()
     {
-        Debug.Log("SPAWN OBSTACLES");
+        //Debug.Log("SPAWN OBSTACLES");
 
         int randRange;
 
