@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerDataSO : ScriptableObject
 {
 
+    public string UserId;
     public string UserName;
-
 
 
 }

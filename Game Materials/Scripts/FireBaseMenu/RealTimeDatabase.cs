@@ -39,8 +39,8 @@ public class RealTimeDatabase : MonoBehaviour
 
         Debug.Log("Start Db");
 
-        StartCoroutine(LoadData(playerData.UserName));
-        StartCoroutine(LoadBoardData());
+        StartCoroutine(LoadData(playerData.UserId));
+        StartCoroutine(LoadAllUserByScore());
 
     }
 
@@ -73,11 +73,11 @@ public class RealTimeDatabase : MonoBehaviour
 
     public void ShowTable()
     {
-        StartCoroutine(LoadBoardData());
+        StartCoroutine(LoadAllUserByScore());
     }
 
 
-    private IEnumerator LoadBoardData()
+    private IEnumerator LoadAllUserByScore()
     {
         var user = dbRef.Child("users").OrderByChild("score").GetValueAsync();
 
@@ -127,7 +127,7 @@ public class RealTimeDatabase : MonoBehaviour
 
             string json = JsonUtility.ToJson(user2229);
 
-            dbRef.Child("users").Child(Name).SetRawJsonValueAsync(json);
+            dbRef.Child("users").Child(playerData.UserId).SetRawJsonValueAsync(json);
     
     }
 
@@ -150,7 +150,7 @@ public class RealTimeDatabase : MonoBehaviour
         {
             Score.text = scoreNow.text;
 
-            SaveData(playerData.UserName,int.Parse(scoreNow.text));
+            SaveData(Name.text, int.Parse(scoreNow.text));
         }
     }
 

@@ -15,6 +15,9 @@ public class RegistrationScript : MonoBehaviour
     public FirebaseAuth auth;
     public FirebaseUser user;
 
+    private const string LOG_IN_MENU_SCENE = "Exit menu";
+    private const string MAIN_MENU_SCENE = "Main menu";
+
     [SerializeField]
     private InputField Email;
     [SerializeField]
@@ -28,7 +31,10 @@ public class RegistrationScript : MonoBehaviour
     private Text ErrorField;
 
     [SerializeField]
-    PlayerDataSO playerData; 
+    PlayerDataSO playerData;
+
+    private int UserId;
+
 
     private void Awake()
     {
@@ -48,16 +54,12 @@ public class RegistrationScript : MonoBehaviour
             }
 
         });
-    }
-
-    private void Start()
-    {
-        Debug.Log("Start scene");
+        StartCoroutine(LoadUserId());
     }
 
     private void InitializeFirebase()
     {
-        Debug.Log("Setting up");
+        //Debug.Log("Setting up");
 
         auth = FirebaseAuth.DefaultInstance;
 
@@ -65,7 +67,9 @@ public class RegistrationScript : MonoBehaviour
 
     public void RegisterButton()
     {
-        StartCoroutine(Register(Email.text, Password.text, Nickname.text));
+
+
+        StartCoroutine(Register(Email.text, Password.text, UserId.ToString()));
     }
 
     private IEnumerator Register(string _email, string _password, string _username)
@@ -126,15 +130,12 @@ public class RegistrationScript : MonoBehaviour
                     }
                     else
                     {
-                        ErrorField.text = "Sucessful Registraion";
-
-                        Debug.Log(user.Email);
-
-                        playerData.UserName = user.DisplayName;
+                        playerData.UserId = user.DisplayName;
+                        playerData.UserName = Nickname.text;
 
                         SaveData();
 
-                        SceneManager.LoadScene("Main menu");
+                        SceneManager.LoadScene(MAIN_MENU_SCENE);
 
 
                     }
@@ -147,7 +148,7 @@ public class RegistrationScript : MonoBehaviour
 
     private void SaveData()
     {
-        UserData userData = new UserData(user.DisplayName, 0);
+        UserData userData = new UserData(Nickname.text, 0);
 
         string json = JsonUtility.ToJson(userData);
 
@@ -159,62 +160,46 @@ public class RegistrationScript : MonoBehaviour
 
     public void GoToLogInMenu()
     {
-        SceneManager.LoadScene("Exit menu");
+        SceneManager.LoadScene(LOG_IN_MENU_SCENE);
     }
 
-
-    /*
-     private IEnumerator Login(string _email, string _password)
+    private IEnumerator LoadUserId()
     {
-        //Call the Firebase auth signin function passing the email and password
-        var LoginTask = auth.SignInWithEmailAndPasswordAsync(_email, _password);
-        //Wait until the task completes
-        yield return new WaitUntil(predicate: () => LoginTask.IsCompleted);
+        var user = dbRef.Child("users").OrderByKey().GetValueAsync();
 
-        if (LoginTask.Exception != null)
+        yield return new WaitUntil(predicate: () => user.IsCompleted);
+
+        if (user.Exception != null)
         {
-            //If there are errors handle them
-            Debug.LogWarning(message: $"Failed to register task with {LoginTask.Exception}");
-            FirebaseException firebaseEx = LoginTask.Exception.GetBaseException() as FirebaseException;
-            AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+            Debug.LogError(user.Exception);
+        }
+        else if (user.Result.Value == null)
+        {
+            Debug.Log("Null");
+            UserId = 0;
 
-            string message = "Login Failed!";
-            switch (errorCode)
-            {
-                case AuthError.MissingEmail:
-                    message = "Missing Email";
-                    break;
-                case AuthError.MissingPassword:
-                    message = "Missing Password";
-                    break;
-                case AuthError.WrongPassword:
-                    message = "Wrong Password";
-                    break;
-                case AuthError.InvalidEmail:
-                    message = "Invalid Email";
-                    break;
-                case AuthError.UserNotFound:
-                    message = "Account does not exist";
-                    break;
-            }
-            warningLoginText.text = message;
         }
         else
         {
-            //User is now logged in
-            //Now get the result
-            User = LoginTask.Result;
-            Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
-            warningLoginText.text = "";
-            confirmLoginText.text = "Logged In";
+            DataSnapshot snapshot = user.Result;
+
+            List<DataSnapshot> reverseList = new List<DataSnapshot>();
+
+            foreach (DataSnapshot clidSnapshot in snapshot.Children)
+            {
+                reverseList.Add(clidSnapshot);
+            }
+
+
+            UserId =int.Parse( reverseList[reverseList.Count-1].Key.ToString());
+            UserId += 1;
+
+            Debug.Log(UserId);
+
         }
+
+
     }
-     
-     
-     */
-
-
-
 
 
 

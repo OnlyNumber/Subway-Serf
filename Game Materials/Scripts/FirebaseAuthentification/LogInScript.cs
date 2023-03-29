@@ -23,6 +23,12 @@ public class LogInScript : MonoBehaviour
     [SerializeField]
     PlayerDataSO playerData;
 
+    //DatabaseReference dbRef;
+
+    private void Start()
+    {
+        //dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+    }
 
     private void Awake()
     {
@@ -98,15 +104,45 @@ public class LogInScript : MonoBehaviour
             //Now get the result
             user = LoginTask.Result;
 
-            playerData.UserName = user.DisplayName;
-
-            
+            playerData.UserId = user.DisplayName;
+            //playerData.UserName = 
+            //StartCoroutine(FindName());
 
             SceneManager.LoadScene("Main Menu");
-            FirebaseAuth.DefaultInstance.SignOut();
+            
+            //FirebaseAuth.DefaultInstance.SignOut();
             
         }
     }
+
+    /*private IEnumerator FindName()
+    {
+        var user = dbRef.Child("users").Child(playerData.UserId).GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => user.IsCompleted);
+
+        if (user.Exception != null)
+        {
+            Debug.Log(user.Exception);
+        }
+        else if (user.Result == null)
+        {
+            Debug.Log("Null");
+        }
+        else
+        {
+            DataSnapshot snapshot = user.Result;
+
+            playerData.UserName = snapshot.Child("name").ToString();
+
+            //userDataTransfer = new UserData(snapshot.Child("name").Value.ToString(), int.Parse(snapshot.Child("score").Value.ToString()));
+
+            //Name.text = userDataTransfer.name;
+
+            //Score.text = userDataTransfer.score.ToString();
+        }
+    }*/
+
 
     public void GoToRegistration()
     {
