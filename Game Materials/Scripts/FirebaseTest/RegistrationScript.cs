@@ -50,6 +50,11 @@ public class RegistrationScript : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        Debug.Log("Start scene");
+    }
+
     private void InitializeFirebase()
     {
         Debug.Log("Setting up");

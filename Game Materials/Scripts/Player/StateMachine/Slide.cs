@@ -25,7 +25,7 @@ public class Slide : State
             StateManager.instance.GoToNextState(new Jumping());
         }
 
-        if (StateManager.instance.playerControl.upCollider.enabled == true)
+        if (StateManager.instance.playerControl.UpCollider.enabled == true)
         {
             StateManager.instance.GoToNextState(new Running());
         }

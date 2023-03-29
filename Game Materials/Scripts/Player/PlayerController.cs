@@ -12,7 +12,22 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRb;
 
     [SerializeField]
-    public BoxCollider upCollider;
+    private BoxCollider upCollider;
+
+    public BoxCollider UpCollider
+    {
+        private set
+        {
+            upCollider = value;
+        }
+        get
+        {
+            return upCollider;
+        }
+    }
+
+    //[SerializeField]
+    //private BoxCollider downCollider;
 
     [SerializeField]
     private float slideTime;

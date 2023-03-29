@@ -2,39 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class MovingFloor : MonoBehaviour
 {
-    [SerializeField]
+    private Rigidbody myRb;
+
+    
     private float speed;
 
+    [SerializeField]
     private float currentSpeed;
 
-    [SerializeField]
-    private float positionForDeath;
+    private Vector3 firstPos = new Vector3(0, 0, 185.5f);
 
-    Rigidbody myRb;
+    private Vector3 finishPos = new Vector3(0, 0, -85.9f);
 
     private void Start()
     {
-        currentSpeed = speed;
-
         myRb = GetComponent<Rigidbody>();
 
         SpawnManager.instance.onIsGameFinish += GameIsOff;
         SpawnManager.instance.onIsGameStart += GameIsOn;
-
     }
 
     void Update()
     {
-        
         myRb.velocity = new Vector3(0, 0, -speed);
 
-        if(transform.position.z <= positionForDeath)
+        if (transform.position.z <= finishPos.z)
         {
-            gameObject.SetActive(false);
-        }
 
+
+            transform.position = firstPos;
+        }
 
     }
 
@@ -46,12 +45,6 @@ public class Obstacle : MonoBehaviour
     private void GameIsOn()
     {
         speed = currentSpeed;
-    }
-
-
-    public void OffObject()
-    {
-
     }
 
 }

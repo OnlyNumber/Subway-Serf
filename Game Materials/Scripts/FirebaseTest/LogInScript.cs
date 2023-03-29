@@ -100,9 +100,10 @@ public class LogInScript : MonoBehaviour
 
             playerData.UserName = user.DisplayName;
 
+            
 
             SceneManager.LoadScene("Main Menu");
-
+            FirebaseAuth.DefaultInstance.SignOut();
             
         }
     }

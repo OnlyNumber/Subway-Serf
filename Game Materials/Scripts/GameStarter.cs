@@ -10,16 +10,11 @@ public class GameStarter : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-
-            SpawnManager.instance.ISGAME = true;
-        }
+        
     }
 
-/*private void OnMouseDown()
+    public void StartGame()
     {
         Debug.Log("Work");
-    }*/
-
+    }
 }

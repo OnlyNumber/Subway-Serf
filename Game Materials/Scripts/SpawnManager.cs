@@ -8,7 +8,6 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
 
-
     public delegate void OnGameChange();
 
     public OnGameChange onIsGameStart;
@@ -32,14 +31,10 @@ public class SpawnManager : MonoBehaviour
             IsGame = value;
             if (IsGame == true)
             {
-                //Debug.Log("Change on true");
-
                 onIsGameStart?.Invoke();
             }
             else
             {
-
-                //Debug.Log("Change on false");
                 onIsGameFinish?.Invoke();
             }
         }
@@ -47,19 +42,31 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private float WaitTimeBeforeSpawn;
+    
     [SerializeField]
     private float TimeForSpawnObstacle;
 
-    //[SerializeField]
     private GameObject[] obstaclesPool;
 
     [SerializeField]
     private GameObject[] obstaclePrefab;
 
-
+    //[SerializeField]
+    //private List<ObstacleAttack> []obstacleAttackList = new List<ObstacleAttack>[3];
+    
+    
 
     [SerializeField]
     private Transform[] spawnPoints;
+
+
+    private enum ObstacleType
+    {
+        n = 0,
+        o = 1,
+        O = 2,
+        A = 3
+    }
 
     private void Awake()
     {
@@ -68,7 +75,6 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("OBGAMESTART");
 
         onIsGameStart += GameStart;
 
@@ -98,48 +104,35 @@ public class SpawnManager : MonoBehaviour
 
         }
 
+        /*foreach (var item in obstaclesPool)
+        {
+            Debug.Log(item.name);
+        }*/
 
-
-
-
-    }
-
-    private void Update()
-    {
-        //Debug.Log("EXIST");
     }
 
     IEnumerator WaitTime()
     {
         yield return new WaitForSeconds(WaitTimeBeforeSpawn);
-
         
         StartCoroutine(SpawnObstacles());
-
     }
 
     void StopSpawning()
     {
         StopAllCoroutines();
     }
-
-
-
     
     IEnumerator SpawnObstacles()
     {
-        //Debug.Log("SPAWN OBSTACLES");
-
-        int randRange;
+        //int randRange;
 
         while (IsGame)
         {
 
-            while(true)
+            /*while(true)
             {
                 randRange = Random.Range(0, obstaclesPool.Length);
-
-                //Debug.Log(randRange);
 
                 if(obstaclesPool[randRange].activeInHierarchy == false)
                 {
@@ -154,6 +147,20 @@ public class SpawnManager : MonoBehaviour
 
             obstaclesPool[randRange].transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
             obstaclesPool[randRange].transform.rotation = spawnPoints[0].rotation;
+            */
+
+
+
+            /*foreach (var item in RandomObstacleAttackGenerator().pointsObstacle)
+            {
+                Debug.Log(item);
+            }*/
+
+
+
+            ObstacleWave(RandomObstacleAttackGenerator());
+
+            
 
 
             yield return new WaitForSeconds(TimeForSpawnObstacle);
@@ -166,18 +173,190 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(WaitTime());
     }
 
-    [ContextMenu("Remove all obstacles")]
     public void SetOffAllObstacles()
     {
 
         for (int i = 0; i < obstaclesPool.Length; i++)
         {
             obstaclesPool[i].gameObject.SetActive(false);
+        }
+    }
 
-        
+    private void ObstacleWave(ObstacleAttack attack)
+    {
+        //GameObject obst;
+
+        Debug.Log("Start Wave");
+
+        for (int i = 0; i < attack.pointsObstacle.Length; i++)
+        {
+
+            switch(attack.pointsObstacle[i])
+            {
+                case 'A':
+                    {
+                        SetObstacle(FindUnActiveObstacle('o'), spawnPoints[i].transform);
+
+                        /*obst = FindUnActiveObstacle('o');
+                        obst.transform.position = spawnPoints[i].transform.position;
+                        obst.transform.rotation = spawnPoints[i].transform.rotation;
+
+                        obst.SetActive(true);*/
+
+                        SetObstacle(FindUnActiveObstacle('O'), spawnPoints[i].transform);
+
+                        /*obst = FindUnActiveObstacle('O');
+                        obst.transform.position = spawnPoints[i].transform.position;
+                        obst.transform.rotation = spawnPoints[i].transform.rotation;
+
+                        obst.SetActive(true);*/
+
+
+                        break;
+
+                    }
+
+                case 'n':
+                    {
+                        break;
+                    }
+
+
+                default:
+                    {
+                        SetObstacle(FindUnActiveObstacle(attack.pointsObstacle[i]), spawnPoints[i].transform);
+
+
+                        /*obst = FindUnActiveObstacle(attack.pointsObstacle[i]);
+                        obst.transform.position = spawnPoints[i].transform.position;
+                        obst.transform.rotation = spawnPoints[i].transform.rotation;
+
+                        obst.SetActive(true);*/
+                        break;
+                    }
+            
+            }
+
+            
         }
 
     }
+
+    private void SetObstacle(GameObject obst, Transform point)
+    {
+        obst.transform.position = point.position;
+        obst.transform.rotation = point.rotation;
+
+        obst.SetActive(true);
+    }
+
+
+    private ObstacleAttack RandomObstacleAttackGenerator()
+    {
+        //Debug.Log("Start random");
+
+        bool isCompleted = false;
+
+        char[] obstaclesType = new char[spawnPoints.Length];
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    {
+                        obstaclesType[i] = 'n';
+                            break;
+                    }
+                case 1:
+                    {
+                        obstaclesType[i] = 'A';
+                        break;
+                    }
+                case 2:
+                    {
+                        obstaclesType[i] = 'o';
+                        break;
+                    }
+                case 3:
+                    {
+                        obstaclesType[i] = 'O';
+                        break;
+                    }
+
+
+            }
+        }
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if(obstaclesType[i] != 'A')
+            {
+                isCompleted = true;
+            }
+        }
+
+        if(isCompleted == false)
+        {
+            obstaclesType[Random.Range(0, obstaclesType.Length)] = 'O';
+        }
+
+        
+
+        return new ObstacleAttack(obstaclesType);
+    }
+
+
+    /*private IEnumerator ObstacleAttack(List<ObstacleAttack> obstacleAttackList)
+    {
+        foreach (ObstacleAttack item in obstacleAttackList)
+        {
+            
+            yield return new WaitForSeconds(item.waitTime);
+
+            //ObstacleWave();
+
+
+        }
+
+    }*/
+
+    private GameObject FindUnActiveObstacle(char type)
+    {
+        //Debug.Log("Start find");
+
+        while (true)
+        {
+            //randRange = Random.Range(0, obstaclesPool.Length);
+
+            foreach (var item in obstaclesPool)
+            {
+                if (item.activeInHierarchy == false )
+                {
+                    if(item.name == "JumpObstacle(Clone)" && type == 'o' ||
+                        item.name == "SlideObstacle(Clone)" && type == 'O')
+                    {
+                        return item;
+                    }
+                    else
+                    {
+                        Debug.Log("Eterity");
+                    }
+
+
+                }
+            }
+        }
+
+        //Debug.Log("End find");
+
+
+    }
+
+
+
+
 
 
 }

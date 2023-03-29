@@ -8,7 +8,7 @@ public class Running : State
     {
         base.OnEnter();
 
-        StateManager.instance.animController.SetTrigger("isRunning" );
+        StateManager.instance.animController.SetBool("IsRunning", true );
 
     }
 
@@ -17,12 +17,7 @@ public class Running : State
     {
         base.OnUpdate();
 
-       // Debug.Log("Running");
-
-
-        //StateManager.instance.animController.SetBool("isRunning", );
-
-        if(StateManager.instance.playerControl.upCollider.enabled == false)
+        if(StateManager.instance.playerControl.UpCollider.enabled == false)
         {
             StateManager.instance.GoToNextState(new Slide());
         }
@@ -34,12 +29,12 @@ public class Running : State
 
     }
 
-    /*public override void OnExit()
+    public override void OnExit()
     {
         base.OnExit();
-        StateManager.instance.animController.SetBool("isRunning", false);
+        StateManager.instance.animController.SetBool("IsRunning", false);
 
 
-    }*/
+    }
 
 }

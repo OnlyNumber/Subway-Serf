@@ -24,7 +24,7 @@ public class Jumping : State
         if (StateManager.instance.playerControl.CheckGround() == true)
         {
 
-            if (StateManager.instance.playerControl.upCollider.enabled == false)
+            if (StateManager.instance.playerControl.UpCollider.enabled == false)
             {
                 StateManager.instance.GoToNextState(new Slide());
                 return;

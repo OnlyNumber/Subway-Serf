@@ -37,6 +37,8 @@ public class RealTimeDatabase : MonoBehaviour
     {
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
 
+        Debug.Log("Start Db");
+
         StartCoroutine(LoadData(playerData.UserName));
         StartCoroutine(LoadBoardData());
 
@@ -92,8 +94,6 @@ public class RealTimeDatabase : MonoBehaviour
         else
         {
             DataSnapshot snapshot = user.Result;
-
-            GameObject gO;
 
             List<DataSnapshot> reverseList = new List<DataSnapshot>();
 
