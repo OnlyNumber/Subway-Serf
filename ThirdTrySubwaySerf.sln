@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{529A5A18-BC5E-7C22-FF02-42C291F6EC0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunarConsole", "LunarConsole.csproj", "{A5FB81F6-C768-2AB5-F0D6-ED565831246B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunarConsoleEditor", "LunarConsoleEditor.csproj", "{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMobileAds.Editor", "GoogleMobileAds.Editor.csproj", "{3C947D3C-0F55-8D3E-7556-FA286DF9CD34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{529A5A18-BC5E-7C22-FF02-42C291F6EC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{529A5A18-BC5E-7C22-FF02-42C291F6EC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{529A5A18-BC5E-7C22-FF02-42C291F6EC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{529A5A18-BC5E-7C22-FF02-42C291F6EC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FB81F6-C768-2AB5-F0D6-ED565831246B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5FB81F6-C768-2AB5-F0D6-ED565831246B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5FB81F6-C768-2AB5-F0D6-ED565831246B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5FB81F6-C768-2AB5-F0D6-ED565831246B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C947D3C-0F55-8D3E-7556-FA286DF9CD34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C947D3C-0F55-8D3E-7556-FA286DF9CD34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C947D3C-0F55-8D3E-7556-FA286DF9CD34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C947D3C-0F55-8D3E-7556-FA286DF9CD34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
