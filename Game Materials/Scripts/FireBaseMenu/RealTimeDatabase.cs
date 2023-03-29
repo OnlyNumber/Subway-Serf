@@ -42,6 +42,13 @@ public class RealTimeDatabase : MonoBehaviour
         StartCoroutine(LoadData(playerData.UserId));
         StartCoroutine(LoadAllUserByScore());
 
+        //SpawnManager.instance.onIsGameFinish
+
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveRecord();
     }
 
 

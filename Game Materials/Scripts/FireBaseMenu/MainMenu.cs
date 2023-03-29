@@ -9,7 +9,9 @@ public class MainMenu : MonoBehaviour
     SpawnManager spawnManager;
 
     [SerializeField]
-    private string nextScene;
+    private PlayerDataSO playerData;
+
+    private const string LOG_IN_MENU_SCENE = "Exit menu";
 
     [SerializeField]
     private Button ExitButton;
@@ -55,9 +57,10 @@ public class MainMenu : MonoBehaviour
 
     public void ExitFromAccount()
     {
+        playerData.UserId = null;
+        playerData.UserName = "";
         
-        
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(LOG_IN_MENU_SCENE);
     }
 
     public void StartGame()

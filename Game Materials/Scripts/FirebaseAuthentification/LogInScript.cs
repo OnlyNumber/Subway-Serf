@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class LogInScript : MonoBehaviour
 {
+    private const string REGISTRATION_MENU_SCENE = "Registration menu";
+    private const string MAIN_MENU_SCENE = "Main menu";
+
 
     [SerializeField]
     private InputField Email;
@@ -27,25 +30,35 @@ public class LogInScript : MonoBehaviour
 
     private void Start()
     {
-        //dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+        StartCoroutine(CheckAndFixDependenciesAsync());
+
+        if(playerData.UserName != "")
+        {
+            SceneManager.LoadScene(MAIN_MENU_SCENE);
+        }
+        
+
     }
 
-    private void Awake()
+   
+
+    private IEnumerator CheckAndFixDependenciesAsync()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
+
+        yield return new WaitUntil(() => dependencyTask.IsCompleted);
+
+        dependencyStatus = dependencyTask.Result;
+
+        if (dependencyStatus == DependencyStatus.Available)
         {
-            dependencyStatus = task.Result;
+            InitializeFirebase();
+        }
+        else
+        {
+            Debug.LogError("Error:" + dependencyStatus);
+        }
 
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                InitializeFirebase();
-            }
-            else
-            {
-                Debug.LogError("Error:" + dependencyStatus);
-            }
-
-        });
     }
 
     private void InitializeFirebase()
@@ -55,6 +68,27 @@ public class LogInScript : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
 
     }
+
+    private IEnumerator CheckForAutoLogin()
+    {
+
+        if(user != null)
+        {
+            var reloadUserTask = user.ReloadAsync();
+
+            yield return new WaitUntil(() => reloadUserTask.IsCompleted);
+
+            //CheckForAutoLogin()
+        }
+        else
+        {
+            //Refere
+        }
+
+    }
+
+
+
 
     public void LogInButton()
     {
@@ -104,49 +138,24 @@ public class LogInScript : MonoBehaviour
             //Now get the result
             user = LoginTask.Result;
 
-            playerData.UserId = user.DisplayName;
-            //playerData.UserName = 
-            //StartCoroutine(FindName());
+            playerData.UserId = user.UserId;
+            playerData.UserName = user.DisplayName;
 
-            SceneManager.LoadScene("Main Menu");
+            Debug.Log(user.UserId);
+
+            SceneManager.LoadScene(MAIN_MENU_SCENE);
             
             //FirebaseAuth.DefaultInstance.SignOut();
             
         }
     }
 
-    /*private IEnumerator FindName()
-    {
-        var user = dbRef.Child("users").Child(playerData.UserId).GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => user.IsCompleted);
-
-        if (user.Exception != null)
-        {
-            Debug.Log(user.Exception);
-        }
-        else if (user.Result == null)
-        {
-            Debug.Log("Null");
-        }
-        else
-        {
-            DataSnapshot snapshot = user.Result;
-
-            playerData.UserName = snapshot.Child("name").ToString();
-
-            //userDataTransfer = new UserData(snapshot.Child("name").Value.ToString(), int.Parse(snapshot.Child("score").Value.ToString()));
-
-            //Name.text = userDataTransfer.name;
-
-            //Score.text = userDataTransfer.score.ToString();
-        }
-    }*/
+    
 
 
     public void GoToRegistration()
     {
-        SceneManager.LoadScene("Registration menu");
+        SceneManager.LoadScene(REGISTRATION_MENU_SCENE);
     }
 
 }

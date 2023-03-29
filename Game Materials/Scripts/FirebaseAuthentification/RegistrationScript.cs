@@ -54,7 +54,7 @@ public class RegistrationScript : MonoBehaviour
             }
 
         });
-        StartCoroutine(LoadUserId());
+        //StartCoroutine(LoadUserId());
     }
 
     private void InitializeFirebase()
@@ -69,7 +69,7 @@ public class RegistrationScript : MonoBehaviour
     {
 
 
-        StartCoroutine(Register(Email.text, Password.text, UserId.ToString()));
+        StartCoroutine(Register(Email.text, Password.text, Nickname.text));
     }
 
     private IEnumerator Register(string _email, string _password, string _username)
@@ -130,7 +130,7 @@ public class RegistrationScript : MonoBehaviour
                     }
                     else
                     {
-                        playerData.UserId = user.DisplayName;
+                        playerData.UserId = user.UserId;
                         playerData.UserName = Nickname.text;
 
                         SaveData();
@@ -152,7 +152,7 @@ public class RegistrationScript : MonoBehaviour
 
         string json = JsonUtility.ToJson(userData);
 
-        dbRef.Child("users").Child(user.DisplayName).SetRawJsonValueAsync(json);
+        dbRef.Child("users").Child(user.UserId).SetRawJsonValueAsync(json);
 
         
 
@@ -163,7 +163,7 @@ public class RegistrationScript : MonoBehaviour
         SceneManager.LoadScene(LOG_IN_MENU_SCENE);
     }
 
-    private IEnumerator LoadUserId()
+    /*private IEnumerator LoadUserId()
     {
         var user = dbRef.Child("users").OrderByKey().GetValueAsync();
 
@@ -199,7 +199,7 @@ public class RegistrationScript : MonoBehaviour
         }
 
 
-    }
+    }*/
 
 
 
