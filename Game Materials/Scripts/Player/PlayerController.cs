@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //[SerializeField]
-    //private BoxCollider downCollider;
+    [SerializeField]
+    private BoxCollider downCollider;
 
     [SerializeField]
     private float slideTime;
@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
     {
         upCollider.enabled = false;
 
+        downCollider.enabled = true;
+
         myRb.velocity = new Vector2(myRb.velocity.x, -downPower);
 
         yield return new WaitForSeconds(slideTime);
@@ -99,8 +101,22 @@ public class PlayerController : MonoBehaviour
     {
         if (CheckGround())
         {
+            //StopAllCoroutines();
+            
             myRb.velocity = new Vector2(myRb.velocity.x, jumpPower);
+
+            StartCoroutine(OffBoxCollider());
         }
+    }
+
+    private IEnumerator OffBoxCollider()
+    {
+        downCollider.enabled = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        downCollider.enabled = true;
+
     }
 
     public void SlideInvoker()

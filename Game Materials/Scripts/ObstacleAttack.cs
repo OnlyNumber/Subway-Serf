@@ -5,17 +5,17 @@ using UnityEngine;
 public class ObstacleAttack
 {
 
-    public char[] pointsObstacle;
+    public SpawnManager.ObstacleType[] pointsObstacle;
 
    // public float waitTime;
 
     
 
-    public ObstacleAttack(params char[] points )
+    public ObstacleAttack(params SpawnManager.ObstacleType[] points )
     {
         //waitTime = time;
 
-        pointsObstacle = new char[points.Length];
+        pointsObstacle = new SpawnManager.ObstacleType[points.Length];
 
         for (int i = 0; i < pointsObstacle.Length; i++)
         {

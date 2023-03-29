@@ -4711,6 +4711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animController: {fileID: 1119934060}
   upCollider: {fileID: 1950444759}
+  downCollider: {fileID: 1950444760}
   slideTime: 1.25
   lines:
   - {fileID: 1901837249}

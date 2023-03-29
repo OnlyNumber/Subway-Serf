@@ -51,21 +51,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] obstaclePrefab;
 
-    //[SerializeField]
-    //private List<ObstacleAttack> []obstacleAttackList = new List<ObstacleAttack>[3];
-    
-    
-
     [SerializeField]
     private Transform[] spawnPoints;
 
-
-    private enum ObstacleType
+    public enum ObstacleType
     {
-        n = 0,
-        o = 1,
-        O = 2,
-        A = 3
+        NoObstacle = 0,
+        JumpObstacle = 1,
+        SlideObstacle = 2,
+        ClosedObstacle = 3
     }
 
     private void Awake()
@@ -79,10 +73,6 @@ public class SpawnManager : MonoBehaviour
         onIsGameStart += GameStart;
 
         onIsGameFinish += StopSpawning;
-
-        
-
-        //StartCoroutine(SpawnObstacles());
 
         obstaclesPool = new GameObject[sizeOfObstaclePool];
 
@@ -100,14 +90,7 @@ public class SpawnManager : MonoBehaviour
             }
 
             obstaclesPool[i].SetActive(false);
-
-
         }
-
-        /*foreach (var item in obstaclesPool)
-        {
-            Debug.Log(item.name);
-        }*/
 
     }
 
@@ -130,38 +113,7 @@ public class SpawnManager : MonoBehaviour
         while (IsGame)
         {
 
-            /*while(true)
-            {
-                randRange = Random.Range(0, obstaclesPool.Length);
-
-                if(obstaclesPool[randRange].activeInHierarchy == false)
-                {
-
-
-                    break;
-                }
-
-
-            }
-            obstaclesPool[randRange].SetActive(true);
-
-            obstaclesPool[randRange].transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
-            obstaclesPool[randRange].transform.rotation = spawnPoints[0].rotation;
-            */
-
-
-
-            /*foreach (var item in RandomObstacleAttackGenerator().pointsObstacle)
-            {
-                Debug.Log(item);
-            }*/
-
-
-
             ObstacleWave(RandomObstacleAttackGenerator());
-
-            
-
 
             yield return new WaitForSeconds(TimeForSpawnObstacle);
 
@@ -184,8 +136,6 @@ public class SpawnManager : MonoBehaviour
 
     private void ObstacleWave(ObstacleAttack attack)
     {
-        //GameObject obst;
-
         Debug.Log("Start Wave");
 
         for (int i = 0; i < attack.pointsObstacle.Length; i++)
@@ -193,30 +143,17 @@ public class SpawnManager : MonoBehaviour
 
             switch(attack.pointsObstacle[i])
             {
-                case 'A':
+                case ObstacleType.ClosedObstacle:
                     {
-                        SetObstacle(FindUnActiveObstacle('o'), spawnPoints[i].transform);
+                        SetObstacle(FindUnActiveObstacle(ObstacleType.SlideObstacle), spawnPoints[i].transform);
 
-                        /*obst = FindUnActiveObstacle('o');
-                        obst.transform.position = spawnPoints[i].transform.position;
-                        obst.transform.rotation = spawnPoints[i].transform.rotation;
-
-                        obst.SetActive(true);*/
-
-                        SetObstacle(FindUnActiveObstacle('O'), spawnPoints[i].transform);
-
-                        /*obst = FindUnActiveObstacle('O');
-                        obst.transform.position = spawnPoints[i].transform.position;
-                        obst.transform.rotation = spawnPoints[i].transform.rotation;
-
-                        obst.SetActive(true);*/
-
+                        SetObstacle(FindUnActiveObstacle(ObstacleType.JumpObstacle), spawnPoints[i].transform);
 
                         break;
 
                     }
 
-                case 'n':
+                case ObstacleType.NoObstacle:
                     {
                         break;
                     }
@@ -226,12 +163,6 @@ public class SpawnManager : MonoBehaviour
                     {
                         SetObstacle(FindUnActiveObstacle(attack.pointsObstacle[i]), spawnPoints[i].transform);
 
-
-                        /*obst = FindUnActiveObstacle(attack.pointsObstacle[i]);
-                        obst.transform.position = spawnPoints[i].transform.position;
-                        obst.transform.rotation = spawnPoints[i].transform.rotation;
-
-                        obst.SetActive(true);*/
                         break;
                     }
             
@@ -253,45 +184,19 @@ public class SpawnManager : MonoBehaviour
 
     private ObstacleAttack RandomObstacleAttackGenerator()
     {
-        //Debug.Log("Start random");
-
         bool isCompleted = false;
 
-        char[] obstaclesType = new char[spawnPoints.Length];
+        ObstacleType[] obstaclesType = new ObstacleType[spawnPoints.Length];
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
 
-            switch (Random.Range(0, 4))
-            {
-                case 0:
-                    {
-                        obstaclesType[i] = 'n';
-                            break;
-                    }
-                case 1:
-                    {
-                        obstaclesType[i] = 'A';
-                        break;
-                    }
-                case 2:
-                    {
-                        obstaclesType[i] = 'o';
-                        break;
-                    }
-                case 3:
-                    {
-                        obstaclesType[i] = 'O';
-                        break;
-                    }
-
-
-            }
+            obstaclesType[i] = (ObstacleType)Random.Range(0, 4);
         }
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if(obstaclesType[i] != 'A')
+            if(obstaclesType[i] != ObstacleType.ClosedObstacle)
             {
                 isCompleted = true;
             }
@@ -299,7 +204,7 @@ public class SpawnManager : MonoBehaviour
 
         if(isCompleted == false)
         {
-            obstaclesType[Random.Range(0, obstaclesType.Length)] = 'O';
+            obstaclesType[Random.Range(0, obstaclesType.Length)] = ObstacleType.SlideObstacle;
         }
 
         
@@ -307,35 +212,16 @@ public class SpawnManager : MonoBehaviour
         return new ObstacleAttack(obstaclesType);
     }
 
-
-    /*private IEnumerator ObstacleAttack(List<ObstacleAttack> obstacleAttackList)
+    private GameObject FindUnActiveObstacle(ObstacleType type)
     {
-        foreach (ObstacleAttack item in obstacleAttackList)
-        {
-            
-            yield return new WaitForSeconds(item.waitTime);
-
-            //ObstacleWave();
-
-
-        }
-
-    }*/
-
-    private GameObject FindUnActiveObstacle(char type)
-    {
-        //Debug.Log("Start find");
-
         while (true)
         {
-            //randRange = Random.Range(0, obstaclesPool.Length);
-
             foreach (var item in obstaclesPool)
             {
                 if (item.activeInHierarchy == false )
                 {
-                    if(item.name == "JumpObstacle(Clone)" && type == 'o' ||
-                        item.name == "SlideObstacle(Clone)" && type == 'O')
+                    if(item.name == "JumpObstacle(Clone)" && type == ObstacleType.JumpObstacle ||
+                        item.name == "SlideObstacle(Clone)" && type == ObstacleType.SlideObstacle)
                     {
                         return item;
                     }
@@ -349,14 +235,5 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        //Debug.Log("End find");
-
-
     }
-
-
-
-
-
-
 }
