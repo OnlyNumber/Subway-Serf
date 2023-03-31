@@ -15,7 +15,7 @@ public class RegistrationScript : MonoBehaviour
     public FirebaseAuth auth;
     public FirebaseUser user;
 
-    private const string LOG_IN_MENU_SCENE = "Exit menu";
+    private const string LOG_IN_MENU_SCENE = "LogIn menu";
     private const string MAIN_MENU_SCENE = "Main menu";
 
     [SerializeField]

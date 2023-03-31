@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private PlayerDataSO playerData;
 
-    private const string LOG_IN_MENU_SCENE = "Exit menu";
+    private const string LOG_IN_MENU_SCENE = "LogIn menu";
 
     [SerializeField]
     private Button exitButton;
