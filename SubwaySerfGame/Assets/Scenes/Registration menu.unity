@@ -1539,11 +1539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dependencyStatus: 0
-  Email: {fileID: 1451023067}
-  Nickname: {fileID: 2139505632}
-  Password: {fileID: 313665414}
-  RepeatPassword: {fileID: 44164031}
-  ErrorField: {fileID: 956365264}
+  emailField: {fileID: 1451023067}
+  nicknameField: {fileID: 2139505632}
+  passwordField: {fileID: 313665414}
+  repeatPasswordField: {fileID: 44164031}
+  errorField: {fileID: 956365264}
   playerData: {fileID: 11400000, guid: 30f8d969276b01b489812572ef3b544d, type: 2}
 --- !u!1 &1526778878
 GameObject:

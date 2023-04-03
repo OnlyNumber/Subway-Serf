@@ -1170,9 +1170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5248af1144d6c74d934d2fac328d721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Email: {fileID: 81805972}
-  Password: {fileID: 2121543479}
-  ErrorField: {fileID: 673535677}
+  emailField: {fileID: 81805972}
+  passwordField: {fileID: 2121543479}
+  errorField: {fileID: 673535677}
   dependencyStatus: 0
   playerData: {fileID: 11400000, guid: 30f8d969276b01b489812572ef3b544d, type: 2}
 --- !u!1 &1360819317

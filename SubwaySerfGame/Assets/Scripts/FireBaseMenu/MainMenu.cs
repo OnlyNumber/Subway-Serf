@@ -8,8 +8,8 @@ public class MainMenu : MonoBehaviour
 {
     SpawnManager spawnManager;
 
-    [SerializeField]
-    private PlayerDataSO playerData;
+    //[SerializeField]
+    //private PlayerDataSO playerData;
 
     private const string LOG_IN_MENU_SCENE = "LogIn menu";
 
@@ -57,9 +57,14 @@ public class MainMenu : MonoBehaviour
 
     public void ExitFromAccount()
     {
-        playerData.userId = null;
-        playerData.userName = "";
-        
+        //playerData.userId = null;
+        //playerData.userName = "";
+
+        DataHolder.id = null;
+        DataHolder.name = "";
+
+        LogInScript.SignOut();
+
         SceneManager.LoadScene(LOG_IN_MENU_SCENE);
     }
 

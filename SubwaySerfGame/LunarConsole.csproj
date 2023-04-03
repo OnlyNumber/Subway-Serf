@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A5FB81F6-C768-2AB5-F0D6-ED565831246B}</ProjectGuid>
+    <ProjectGuid>{14D7424D-1792-15A1-CD26-D1E12958C4EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>LunarConsole</AssemblyName>

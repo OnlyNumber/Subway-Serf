@@ -10,8 +10,8 @@ public class RealTimeDatabase : MonoBehaviour
 
     UserData userDataTransfer;
 
-    [SerializeField]
-    PlayerDataSO playerData;
+    //[SerializeField]
+    //PlayerDataSO playerData;
 
     
 
@@ -39,7 +39,9 @@ public class RealTimeDatabase : MonoBehaviour
 
         Debug.Log("Start Db");
 
-        StartCoroutine(LoadData(playerData.userId));
+        Debug.Log(DataHolder.id);
+
+        StartCoroutine(LoadData(DataHolder.id));
         StartCoroutine(LoadAllUserByScore());
 
     }
@@ -132,7 +134,7 @@ public class RealTimeDatabase : MonoBehaviour
 
             string json = JsonUtility.ToJson(user2229);
 
-            dbRef.Child("users").Child(playerData.userId).SetRawJsonValueAsync(json);
+            dbRef.Child("users").Child(DataHolder.id).SetRawJsonValueAsync(json);
     
     }
 
@@ -159,7 +161,7 @@ public class RealTimeDatabase : MonoBehaviour
         }
     }
 
-
+    //public void SignOut();
     
 
 

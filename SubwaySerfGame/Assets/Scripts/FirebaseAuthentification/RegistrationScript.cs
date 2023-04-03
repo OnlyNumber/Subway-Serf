@@ -30,8 +30,8 @@ public class RegistrationScript : MonoBehaviour
     [SerializeField] 
     private Text errorField;
 
-    [SerializeField]
-    PlayerDataSO playerData;
+    //[SerializeField]
+    //PlayerDataSO playerData;
 
     private void Awake()
     {
@@ -124,8 +124,11 @@ public class RegistrationScript : MonoBehaviour
                     }
                     else
                     {
-                        playerData.userId = user.UserId;
-                        playerData.userName = nicknameField.text;
+                        DataHolder.id = user.UserId;
+                        DataHolder.name = user.DisplayName;
+
+                        //playerData.userId = user.UserId;
+                        //playerData.userName = nicknameField.text;
 
                         SaveData();
 

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F70FAD67-AD78-5A8A-1067-8BD7C12482E7}</ProjectGuid>
+    <ProjectGuid>{63B5A7CC-90C4-AB45-262E-852640A33C31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>LunarConsoleEditor</AssemblyName>
@@ -817,7 +817,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="LunarConsole.csproj">
-      <Project>{A5FB81F6-C768-2AB5-F0D6-ED565831246B}</Project>
+      <Project>{14D7424D-1792-15A1-CD26-D1E12958C4EA}</Project>
       <Name>LunarConsole</Name>
     </ProjectReference>
   </ItemGroup>

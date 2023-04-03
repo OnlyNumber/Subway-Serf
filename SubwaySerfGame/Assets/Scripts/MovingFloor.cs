@@ -6,10 +6,26 @@ public class MovingFloor : MonoBehaviour
 {
     private Rigidbody myRb;
 
-    
+    [SerializeField]
     private float speed;
 
-    [SerializeField]
+    public float Speed
+    {
+        set
+        {
+            if (value > 0)
+            {
+                speed = value;
+            }
+        }
+        get
+        {
+            return speed;
+        }
+
+
+    }
+
     private float currentSpeed;
 
     private Vector3 firstPos = new Vector3(0, 0, 185.5f);
@@ -26,12 +42,10 @@ public class MovingFloor : MonoBehaviour
 
     void Update()
     {
-        myRb.velocity = new Vector3(0, 0, -speed);
+        myRb.velocity = new Vector3(0, 0, -currentSpeed);
 
         if (transform.position.z <= finishPos.z)
         {
-
-
             transform.position = firstPos;
         }
 
@@ -39,12 +53,12 @@ public class MovingFloor : MonoBehaviour
 
     private void GameIsOff()
     {
-        speed = 0;
+        currentSpeed = 0;
     }
 
     private void GameIsOn()
     {
-        speed = currentSpeed;
+        currentSpeed = speed;
     }
 
 }

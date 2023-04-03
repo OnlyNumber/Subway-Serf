@@ -20,11 +20,11 @@ public class LogInScript : MonoBehaviour
     private Text errorField;
 
     public DependencyStatus dependencyStatus;
-    public FirebaseAuth auth;
+    public static FirebaseAuth auth;
     public FirebaseUser user;
 
-    [SerializeField]
-    PlayerDataSO playerData;
+    //[SerializeField]
+    //PlayerDataSO playerData;
 
     //DatabaseReference dbRef;
 
@@ -32,10 +32,10 @@ public class LogInScript : MonoBehaviour
     {
         StartCoroutine(CheckAndFixDependenciesAsync());
 
-        if(playerData.userName != "")
+        /*if(playerData.userName != "")
         {
             SceneManager.LoadScene(MAIN_MENU_SCENE);
-        }
+        }*/
         
 
     }
@@ -53,6 +53,12 @@ public class LogInScript : MonoBehaviour
         if (dependencyStatus == DependencyStatus.Available)
         {
             InitializeFirebase();
+
+            yield return new WaitForEndOfFrame();
+
+            Debug.Log("Try in");
+            StartCoroutine(CheckForAutoLogin());
+
         }
         else
         {
@@ -61,13 +67,74 @@ public class LogInScript : MonoBehaviour
 
     }
 
+    
+
+    private IEnumerator CheckForAutoLogin()
+    {
+        if(user != null)
+        {
+            var reloadUser = user.ReloadAsync();
+
+            yield return new WaitUntil(() => reloadUser.IsCompleted);
+
+            AutoLogin();
+        }
+        else
+        {
+            Debug.Log("No User");
+        }
+    }
+
+    private void AutoLogin()
+    {
+        if(user != null)
+        {
+            DataHolder.name = user.DisplayName;
+            DataHolder.id = user.UserId;
+
+            //playerData.userId = user.UserId;
+            //playerData.userName = user.DisplayName;
+
+            Debug.Log(user.UserId);
+
+            SceneManager.LoadScene(MAIN_MENU_SCENE);
+        }
+        else
+        {
+
+        }
+    }
+
     private void InitializeFirebase()
     {
         Debug.Log("Setting up");
 
         auth = FirebaseAuth.DefaultInstance;
 
+        auth.StateChanged += AuthStateChanged;
+
+        AuthStateChanged(this, null);
+
+
     }
+
+    void AuthStateChanged(object sender, System.EventArgs eventArgs)
+    {
+        if (auth.CurrentUser != user)
+        {
+            bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
+            if (!signedIn && user != null)
+            {
+                Debug.Log("Signed out " + user.UserId);
+            }
+            user = auth.CurrentUser;
+            if (signedIn)
+            {
+                Debug.Log("Signed in " + user.UserId);
+            }
+        }
+    }
+
 
     public void LogInButton()
     {
@@ -112,8 +179,12 @@ public class LogInScript : MonoBehaviour
         {
             user = LoginTask.Result;
 
-            playerData.userId = user.UserId;
-            playerData.userName = user.DisplayName;
+            DataHolder.name = user.DisplayName;
+            DataHolder.id = user.UserId;
+
+
+            //playerData.userId = user.UserId;
+            //playerData.userName = user.DisplayName;
 
             Debug.Log(user.UserId);
 
@@ -122,7 +193,10 @@ public class LogInScript : MonoBehaviour
         }
     }
 
-    
+    public static void SignOut()
+    {
+        auth.SignOut();
+    }
 
 
     public void GoToRegistration()

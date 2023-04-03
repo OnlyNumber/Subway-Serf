@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e50af998f820dd42aba4d017c215d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 10
+  speed: 10
 --- !u!54 &4211834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e50af998f820dd42aba4d017c215d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 10
+  speed: 10
 --- !u!54 &190816934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1998,9 +1998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 30f8d969276b01b489812572ef3b544d, type: 2}
-  ExitButton: {fileID: 1980994954}
-  ExitFromAccountButton: {fileID: 1499024514}
-  startTouch: {fileID: 153018814}
+  exitButton: {fileID: 1980994954}
+  exitFromAccoutButton: {fileID: 1499024514}
+  startTouchText: {fileID: 153018814}
   startButton: {fileID: 885366273}
 --- !u!1 &548183727
 GameObject:
@@ -3847,7 +3847,7 @@ GameObject:
   - component: {fileID: 1499024515}
   - component: {fileID: 1499024514}
   m_Layer: 5
-  m_Name: ButtonACC
+  m_Name: ButtonExitACC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 1980994955}
   - component: {fileID: 1980994954}
   m_Layer: 5
-  m_Name: ButtonG
+  m_Name: ButtonExitG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4917,18 +4917,6 @@ MonoBehaviour:
       - m_Target: {fileID: 546649120}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ExitFromGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameStarter, Assembly-CSharp
-        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5026,12 +5014,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 30f8d969276b01b489812572ef3b544d, type: 2}
-  Name: {fileID: 1843952205}
-  Score: {fileID: 105941878}
+  nameText: {fileID: 1843952205}
+  scoreText: {fileID: 105941878}
   leaderBoard: {fileID: 1004749501}
   textForLeaderBoard: {fileID: 4861905891327009406, guid: ee67ca16803867148a975ce2aadc7522, type: 3}
   scoreNow: {fileID: 1486383101}
-  LeaderBoardFields:
+  leaderBoardFields:
   - {fileID: 768493848}
   - {fileID: 561367005}
   - {fileID: 826456171}

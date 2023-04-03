@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField]
     private float speed;
 
+    [SerializeField]
     private float currentSpeed;
+
+    public float Speed
+    {
+        set
+        {
+            if(value > 0)
+            {
+                speed = value;
+            }
+        }
+        get
+        {
+            return speed;
+        }
+
+
+    }
+
 
     [SerializeField]
     private float positionForDeath;
@@ -28,7 +46,7 @@ public class Obstacle : MonoBehaviour
     void Update()
     {
         
-        myRb.velocity = new Vector3(0, 0, -speed);
+        myRb.velocity = new Vector3(0, 0, -currentSpeed);
 
         if(transform.position.z <= positionForDeath)
         {
@@ -40,12 +58,12 @@ public class Obstacle : MonoBehaviour
 
     private void GameIsOff()
     {
-        speed = 0;
+        currentSpeed = 0;
     }
 
     private void GameIsOn()
     {
-        speed = currentSpeed;
+        currentSpeed = speed;
     }
 
 
